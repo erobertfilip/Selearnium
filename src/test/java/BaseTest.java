@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ public class BaseTest {
 
     @Before
     public void driverSetup() {
+        WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--safebrowsing-disable-download-protection");
         chromeOptions.addArguments("--start-maximized");
@@ -18,9 +20,9 @@ public class BaseTest {
         driver.get("https://www.saucedemo.com/");
     }
 
-    @After
-    public void quitBrowser() {
-        driver.quit();
-    }
+//    @After
+//    public void quitBrowser() {
+//        driver.quit();
+//    }
 
 }
