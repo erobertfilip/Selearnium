@@ -1,10 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-import pages.LoginPage;
-import pages.InventoryPage;
-import pages.CartPage;
-import pages.CheckoutPage;
-import pages.CheckoutOverviewPage;
+import pages.*;
 
 
 // Happy flow test for buying and finalized a product order
@@ -43,12 +39,17 @@ public class OrderTest extends BaseTest {
         System.out.println(CheckoutOverviewPage.getPaymentInformation());
 
         checkoutOverviewPage.getShippingInformation();
-        Assert.assertTrue(CheckoutOverviewPage.getShippingInformation().equals("FREE PONY EXPRESS DELIVERY!"));
+        Assert.assertTrue(CheckoutOverviewPage.getShippingInformation().equals("Free Pony Express Delivery!"));
         System.out.println(CheckoutOverviewPage.getShippingInformation());
 
         checkoutOverviewPage.getTotalPrice();
         Assert.assertTrue(CheckoutOverviewPage.getTotalPrice().contains("$32.39"));
         System.out.println(CheckoutOverviewPage.getTotalPrice());
         CheckoutOverviewPage.clickOnFinishButton();
+
+        CheckoutCompletePage checkoutCompletePage = new CheckoutCompletePage(driver);
+        Assert.assertEquals(checkoutCompletePage.getOrderCompleteMessage(),"Thank you for your order!");
+        System.out.println(checkoutCompletePage.getOrderCompleteMessage());
         }
+
 }

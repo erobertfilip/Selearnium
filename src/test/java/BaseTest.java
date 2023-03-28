@@ -16,6 +16,7 @@ public class BaseTest {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--safebrowsing-disable-download-protection");
         chromeOptions.addArguments("--start-maximized");
+        chromeOptions.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(chromeOptions);
         driver.get("https://www.saucedemo.com/");
     }

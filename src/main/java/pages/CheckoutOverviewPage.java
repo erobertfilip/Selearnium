@@ -22,7 +22,7 @@ public class CheckoutOverviewPage {
     private static final By itemPrice = By.xpath("//div[@class='inventory_item_price']");
     private static final By paymentInformation = By.xpath("//div[2][@class='summary_value_label'='SauceCard #31337']");
     private static final By shippingInformation = By.xpath("//div[4][@class='summary_value_label'= 'FREE PONY EXPRESS DELIVERY!']");
-    private static final By totalPrice = By.xpath("//div[7][@class='summary_total_label']");
+    private static final By totalPrice = By.xpath("//*[@id='checkout_summary_container']/div/div[2]/div[8]");
     private static final By finishButton = By.xpath("//*[@id='finish']");
     public static void clickOnFinishButton() {
         wait.until(ExpectedConditions.elementToBeClickable(finishButton));

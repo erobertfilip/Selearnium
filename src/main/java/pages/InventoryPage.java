@@ -3,6 +3,7 @@ package pages;
 import com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -29,5 +30,15 @@ public class InventoryPage {
     public void clickOnShoppingCartContainer() {
         wait.until(ExpectedConditions.elementToBeClickable(shoppingCartContainer));
         driver.findElement(shoppingCartContainer).click();
+    }
+
+    public String getAttributeValue(WebElement element, String attribute) {
+        return element.getAttribute(attribute);
+    }
+
+    private final By firstItemImg = By.xpath("//*[@id='item_4_img_link']/img");
+
+    public String firstItemImgAttribute(){
+        return getAttributeValue(driver.findElement(firstItemImg),"src");
     }
 }
