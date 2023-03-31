@@ -1,6 +1,7 @@
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -18,9 +19,12 @@ public class BaseTest {
         driver.get("https://www.saucedemo.com/");
     }
 
-    @After
+
+}
+
+   /* @After
     public void quitBrowser() {
         driver.quit();
     }
 
-}
+}*/
