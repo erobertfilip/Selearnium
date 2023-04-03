@@ -17,6 +17,7 @@ public class CartPage {
     private final By continueShoppingButton = By.id("continue-shopping");
     private final By checkoutButton = By.id("checkout");
     private final By cartList = By.xpath("//*[@id='cart_contents_container']/div/div[1]/div[3]");
+    private final By yourCartTitleLocator = By.xpath("//span[@class='title']");
 
 
     public CartPage(WebDriver driver) {
@@ -48,6 +49,10 @@ public class CartPage {
 
     public String getCartListRemoveClassAttribute() {
         return getAttributeValue(driver.findElement(cartList),"class");
+    }
+
+    public String getYourCartPageTitleText(){
+        return driver.findElement(yourCartTitleLocator).getText();
     }
 
 

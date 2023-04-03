@@ -4,13 +4,16 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.testng.AssertJUnit.fail;
 
 
 public class InventoryPage {
-    WebDriver driver;
+    static WebDriver driver;
     WebDriverWait wait;
 
     // INVENTORY PAGE SELECTORS
@@ -35,7 +38,7 @@ public class InventoryPage {
     private final By resetAppStateButton = By.id("reset_sidebar_link");
     private final By productsPageTitleLocator = By.xpath("//div/span[@class='title']");
     private final By shoppingCartButton = By.id("shopping_cart_container");
-    private final By inventoryList = By.xpath("//div[@class='inventory_list']");
+    private static final By inventoryList = By.xpath("//div[@class='inventory_list']/div");
     private final By sortActiveOption = By.xpath("//div[@class='right_component']/span/span");
     private final By logOutButton = By.id("logout_sidebar_link");
 
@@ -67,29 +70,34 @@ public class InventoryPage {
     private final By backToProductsButton = By.id("back-to-products");
 
 
-    public InventoryPage(WebDriver driver){
+    public InventoryPage(WebDriver driver) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         this.driver = driver;
         PageFactory.initElements(driver, this);
 
     }
-    public void clickOnShoppingCartContainer(){
+
+    public void clickOnShoppingCartContainer() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(shoppingCartButton));
         driver.findElement(shoppingCartButton).click();
     }
-    public void clickOnRemoveFromCartButton(){
+
+    public void clickOnRemoveFromCartButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(bikeLightRemoveFromCartButton));
         driver.findElement(bikeLightRemoveFromCartButton).click();
     }
-    public void clickOnBurgerMenuButton(){
+
+    public void clickOnBurgerMenuButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(burgerMenuButton));
         driver.findElement(burgerMenuButton).click();
     }
-    public void clickOnResetAppStateButton(){
+
+    public void clickOnResetAppStateButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(resetAppStateButton));
         driver.findElement(resetAppStateButton).click();
     }
-    public void clickOnLogOutBtn(){
+
+    public void clickOnLogOutBtn() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(logOutButton));
         driver.findElement(logOutButton).click();
     }
@@ -97,7 +105,7 @@ public class InventoryPage {
     //as the site has only 6 items inventory I've chosen to add a switch. I am aware there could be sites with thousands of items,
     //and other methods would be more fitting/recommended, but for this instance, I've done it this way.
 
-    public void addToCart(String Item){
+    public void addToCart(String Item) {
         switch (Item) {
             case "TShirtRed":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(tShirtRedAddToCart));
@@ -137,112 +145,129 @@ public class InventoryPage {
         }
     }
 
-    public String getInventoryContainerText(){
+    public String getInventoryContainerText() {
         return driver.findElement(invContainer).getText();
     }
+
     public String getAttributeValue(WebElement element, String attribute) {
         return element.getAttribute(attribute);
     }
-    public String checkRemoveButtonResetsAfterResetApp(){
+
+    public String checkRemoveButtonResetsAfterResetApp() {
         return getAttributeValue(driver.findElement(bikeLightAddToCartFullXpath), "id");
     }
-    public void clickOnSortButton(){
+
+    public void clickOnSortButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(sortButton));
         driver.findElement(sortButton).click();
     }
 
     //Sorting switch selector and assert
-    public void selectSort(String Sort){
-        switch (Sort){
+    public void selectSort(String Sort) {
+        switch (Sort) {
             case "Name (A to Z)":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(sortAZ));
                 driver.findElement(sortAZ).click();
-                Assert.assertEquals(Sort,getActiveOptionText());
+                Assert.assertEquals(Sort, getActiveOptionText());
                 break;
             case "Name (Z to A)":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(sortZA));
                 driver.findElement(sortZA).click();
-                Assert.assertEquals(Sort,getActiveOptionText());
+                Assert.assertEquals(Sort, getActiveOptionText());
                 break;
             case "Price (low to high)":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(sortPriceLoHi));
                 driver.findElement(sortPriceLoHi).click();
-                Assert.assertEquals(Sort,getActiveOptionText());
+                Assert.assertEquals(Sort, getActiveOptionText());
                 break;
             case "Price (high to low)":
                 wait.until(ExpectedConditions.visibilityOfElementLocated(sortHiLo));
                 driver.findElement(sortHiLo).click();
-                Assert.assertEquals(Sort,getActiveOptionText());
+                Assert.assertEquals(Sort, getActiveOptionText());
                 break;
         }
     }
 
-    public String getActiveOptionText(){
+    public String getActiveOptionText() {
         return driver.findElement(sortActiveOption).getText();
     }
 
-    public String getProductsPageTitleText(){
+    public String getProductsPageTitleText() {
         return driver.findElement(productsPageTitleLocator).getText();
     }
-    public String getFirstInvItemTitle(){
+
+    public String getFirstInvItemTitle() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstItemTitle));
         return driver.findElement(firstItemTitle).getText();
     }
-    public String getSecondInvItemTitle(){
+
+    public String getSecondInvItemTitle() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(secondItemTitle));
         return driver.findElement(secondItemTitle).getText();
     }
-    public String getThirdInvItemTitle(){
+
+    public String getThirdInvItemTitle() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(thirdItemTitle));
         return driver.findElement(thirdItemTitle).getText();
     }
-    public String getFourthInvItemTitle(){
+
+    public String getFourthInvItemTitle() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(fourthItemTitle));
         return driver.findElement(fourthItemTitle).getText();
     }
-    public String getFifthInvItemTitle(){
+
+    public String getFifthInvItemTitle() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(fifthItemTitle));
         return driver.findElement(fifthItemTitle).getText();
     }
-    public String getSixthInvItemTitle(){
+
+    public String getSixthInvItemTitle() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(sixthItemTitle));
         return driver.findElement(sixthItemTitle).getText();
     }
-    public String getItemContainerTitleText(){
+
+    public String getItemContainerTitleText() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(itemContainerTitle));
         return driver.findElement(itemContainerTitle).getText();
     }
-    public void clickOnFirstInvItem(){
+
+    public void clickOnFirstInvItem() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstItemTitle));
         driver.findElement(firstItemTitle).click();
     }
-    public void clickOnSecondInvItm(){
+
+    public void clickOnSecondInvItm() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(secondItemTitle));
         driver.findElement(secondItemTitle).click();
     }
-    public void clickOnThirdInvItm(){
+
+    public void clickOnThirdInvItm() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(thirdItemTitle));
         driver.findElement(thirdItemTitle).click();
     }
-    public void clickOnFourhInvItm(){
+
+    public void clickOnFourhInvItm() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(fourthItemTitle));
         driver.findElement(fourthItemTitle).click();
     }
-    public void clickOnFifthInvItm(){
+
+    public void clickOnFifthInvItm() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(fifthItemTitle));
         driver.findElement(fifthItemTitle).click();
     }
-    public void clickOnSixthInvItm(){
+
+    public void clickOnSixthInvItm() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(sixthItemTitle));
         driver.findElement(sixthItemTitle).click();
     }
-    public void clickOnBackToProducts(){
+
+    public void clickOnBackToProducts() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(backToProductsButton));
         driver.findElement(backToProductsButton).click();
     }
 
     // Hard Assert methods that verify if the item displayed on the Inventory page list is the same one with the item's container page.
-    public void firstItemTitleAssert(){
+    public void firstItemTitleAssert() {
         String InvFirstItmTitle = getFirstInvItemTitle();
         System.out.println(getFirstInvItemTitle());
         clickOnFirstInvItem();
@@ -251,43 +276,48 @@ public class InventoryPage {
         Assert.assertEquals(InvFirstItmTitle, ContainerItemTitle);
         clickOnBackToProducts();
     }
-    public void secondItemTitleAssert(){
+
+    public void secondItemTitleAssert() {
         String InvSecondItmTitle = getSecondInvItemTitle();
         System.out.println(getSecondInvItemTitle());
         driver.findElement(secondItemTitle).click();
         String ContainerItemTitle = getItemContainerTitleText();
         System.out.println(getItemContainerTitleText());
-        Assert.assertEquals(InvSecondItmTitle,ContainerItemTitle);
+        Assert.assertEquals(InvSecondItmTitle, ContainerItemTitle);
         clickOnBackToProducts();
     }
-    public void thirdItemTitleAssert(){
+
+    public void thirdItemTitleAssert() {
         String InvThirdItmTitle = getThirdInvItemTitle();
         System.out.println(getThirdInvItemTitle());
         driver.findElement(thirdItemTitle).click();
         String ContainerItemTitle = getItemContainerTitleText();
         System.out.println(getItemContainerTitleText());
-        Assert.assertEquals(InvThirdItmTitle,ContainerItemTitle);
+        Assert.assertEquals(InvThirdItmTitle, ContainerItemTitle);
         clickOnBackToProducts();
     }
-    public void fourthItemTitleAssert(){
+
+    public void fourthItemTitleAssert() {
         String InvFourthItmTitle = getFourthInvItemTitle();
         System.out.println(getFourthInvItemTitle());
         driver.findElement(fourthItemTitle).click();
         String ContainerItemTitle = getItemContainerTitleText();
         System.out.println(getItemContainerTitleText());
-        Assert.assertEquals(InvFourthItmTitle,ContainerItemTitle);
+        Assert.assertEquals(InvFourthItmTitle, ContainerItemTitle);
         clickOnBackToProducts();
     }
-    public void fifthItemTitleAssert(){
+
+    public void fifthItemTitleAssert() {
         String InvFifthItmTitle = getFifthInvItemTitle();
         System.out.println(getFifthInvItemTitle());
         driver.findElement(fifthItemTitle).click();
         String ContainerItemTitle = getItemContainerTitleText();
         System.out.println(getItemContainerTitleText());
-        Assert.assertEquals(InvFifthItmTitle,ContainerItemTitle);
+        Assert.assertEquals(InvFifthItmTitle, ContainerItemTitle);
         clickOnBackToProducts();
     }
-    public void sixthItemTitleAssert(){
+
+    public void sixthItemTitleAssert() {
         String InvSixthItmTitle = getSixthInvItemTitle();
         System.out.println(getSixthInvItemTitle());
         driver.findElement(sixthItemTitle).click();
@@ -296,8 +326,9 @@ public class InventoryPage {
         Assert.assertEquals(InvSixthItmTitle, ContainerItemTitle);
         clickOnBackToProducts();
     }
+
     // Method which includes all hard assert methods
-    public void pageItemsAsserts(){
+    public void pageItemsAsserts() {
         firstItemTitleAssert();
         secondItemTitleAssert();
         thirdItemTitleAssert();
@@ -307,50 +338,75 @@ public class InventoryPage {
     }
 
     //Methods that will return picture's unique(or not) URL, respectively the "src" attribute value
-    public String getFirstItemImgAttribute(){
+    public String getFirstItemImgAttribute() {
         return getAttributeValue(driver.findElement(firstItmImg), "src");
     }
-    public String getSecondItemImgAttribute(){
-        return getAttributeValue(driver.findElement(secondItmImg),"src");
-    }
-    public String getThirdItemImgAttribute(){
-        return getAttributeValue(driver.findElement(thirdItmImg),"src");
-    }
-    public String getFourthItemImgAttribute(){
-        return getAttributeValue(driver.findElement(fourthItmImg),"src");
-    }
-    public String getFifthItemImgAttribute(){
-        return getAttributeValue(driver.findElement(fifthItmImg),"src");
-    }
-    public String getSixthItemImgAttribute(){
-        return getAttributeValue(driver.findElement(sixthItmImg),"src");
+
+    public String getSecondItemImgAttribute() {
+        return getAttributeValue(driver.findElement(secondItmImg), "src");
     }
 
+    public String getThirdItemImgAttribute() {
+        return getAttributeValue(driver.findElement(thirdItmImg), "src");
+    }
+
+    public String getFourthItemImgAttribute() {
+        return getAttributeValue(driver.findElement(fourthItmImg), "src");
+    }
+
+    public String getFifthItemImgAttribute() {
+        return getAttributeValue(driver.findElement(fifthItmImg), "src");
+    }
+
+    public String getSixthItemImgAttribute() {
+        return getAttributeValue(driver.findElement(sixthItmImg), "src");
+    }
 
     //Methods that will return Add/Remove button "data-test" attribute
-    public String getBikeLightDataTestAttributeValue(){
+    public String getBikeLightDataTestAttributeValue() {
         return getAttributeValue(driver.findElement(bikeLightAddToCartFullXpath), "data-test");
     }
-    public String getBoltTShirtDataTestAtrbVal(){
-        return getAttributeValue(driver.findElement(boltTshirtAddnRemoveFullXpathBtn),"data-test");
+
+    public String getBoltTShirtDataTestAtrbVal() {
+        return getAttributeValue(driver.findElement(boltTshirtAddnRemoveFullXpathBtn), "data-test");
     }
-    public String getBackpackDataTestAtrbVal(){
-        return getAttributeValue(driver.findElement(backpackAddnRemoveFullXpathBtn),"data-test");
+
+    public String getBackpackDataTestAtrbVal() {
+        return getAttributeValue(driver.findElement(backpackAddnRemoveFullXpathBtn), "data-test");
     }
-    public String getFleeceJktDataTestAtrbVal(){
-        return getAttributeValue(driver.findElement(fleeceJacketAddnRemoveFullXpathBtn),"data-test");
+
+    public String getFleeceJktDataTestAtrbVal() {
+        return getAttributeValue(driver.findElement(fleeceJacketAddnRemoveFullXpathBtn), "data-test");
     }
-    public String getOnesieDataTestAtrbVal(){
-        return getAttributeValue(driver.findElement(onesieAddnRemoveFullXpathBtn),"data-test");
+
+    public String getOnesieDataTestAtrbVal() {
+        return getAttributeValue(driver.findElement(onesieAddnRemoveFullXpathBtn), "data-test");
     }
-    public String getTShirtRdataTestAtrbVal(){
-        return getAttributeValue(driver.findElement(tShirtRedAddnRemoveFullXpathBtn),"data-test");
+
+    public String getTShirtRdataTestAtrbVal() {
+        return getAttributeValue(driver.findElement(tShirtRedAddnRemoveFullXpathBtn), "data-test");
     }
 
 
-
+    public static void placeHolderImgCheck() {
+        List<WebElement> imgElements = driver.findElements(By.tagName("img"));
+        List<String> srcValues = new ArrayList<String>();
+        for (WebElement element : imgElements){
+            String src = element.getAttribute("src");
+            srcValues.add(src);
+        }
+        try {
+            if (srcValues.contains("https://www.saucedemo.com/static/media/sl-404.168b1cce.jpg")) {
+                throw new Exception("Placeholder image(s) found: " + srcValues);
+            }
+        } catch (Exception e) {
+            fail("Error: " + e.getMessage());
+        }
+        System.out.println("No placeholder image(s) found");
+    }
 
 }
+
 
 
 

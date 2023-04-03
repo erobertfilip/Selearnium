@@ -4,8 +4,6 @@ import pages.InventoryPage;
 import pages.LoginPage;
 import org.testng.asserts.SoftAssert;
 
-
-
 public class InventoryTest extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
 
@@ -42,18 +40,9 @@ public class InventoryTest extends BaseTest {
         inventoryPage.clickOnResetAppStateButton();
         String expectedValue = "add-to-cart-sauce-labs-bike-light";
         String idType = inventoryPage.checkRemoveButtonResetsAfterResetApp();
-        Assert.assertEquals(expectedValue, idType);                                       //the assertion fails due to the fact that the "Remove" button does not change back
-        System.out.println(inventoryPage.checkRemoveButtonResetsAfterResetApp()); //to "Add to cart" after using the "Reset App State" button, only after refreshing the page.
+        Assert.assertEquals(expectedValue, idType);                              //the assertion fails due to the fact that the "Remove" button does not change back
+        System.out.println(inventoryPage.checkRemoveButtonResetsAfterResetApp());//to "Add to cart" after using the "Reset App State" button, only after refreshing the page.
     }
-
-    //Code lines below were created in order to receive a positive test result by clicking on the
-    //"Remove button" and only then proceed with the assert
-        /*
-        inventoryPage.clickOnRemoveFromCartButton(); // clicking the remove button after clicking on the Reset App State button
-        String idType2 = inventoryPage.checkRemoveButtonResetsAfterResetApp();  //getting the attribute value
-        Assert.assertEquals(value,idType2); // and now proceeding with the Assert that will return a positive test
-        */
-
 
     @Test
     public void CheckInventoryPageForPlaceholderText() {
@@ -110,9 +99,9 @@ public class InventoryTest extends BaseTest {
     }
 
     @Test
-    public void imgTest() {
+    public void checkForDuplicatedItmImagesTest() {
     LoginPage loginPage = new LoginPage(driver);
-    loginPage.login("standard_user", "secret_sauce"); // switch to "problem_user" in order to observe the assertions fail.
+    loginPage.login("problem_user", "secret_sauce"); // switch to "problem_user" in order to observe the assertions fail.
     InventoryPage inventoryPage = new InventoryPage(driver);
     softAssert.assertNotEquals(inventoryPage.getFirstItemImgAttribute(), inventoryPage.getSecondItemImgAttribute());
     softAssert.assertNotEquals(inventoryPage.getSecondItemImgAttribute(),inventoryPage.getThirdItemImgAttribute());
@@ -121,6 +110,15 @@ public class InventoryTest extends BaseTest {
     softAssert.assertNotEquals(inventoryPage.getFifthItemImgAttribute(),inventoryPage.getSixthItemImgAttribute());
     softAssert.assertAll();
 }
+
+    @Test
+    public void checkForPlaceHolderImagesTest() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("problem_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.placeHolderImgCheck();
+    }
+
 
 
 }
