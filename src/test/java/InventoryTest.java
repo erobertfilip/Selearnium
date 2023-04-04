@@ -7,6 +7,9 @@ import org.testng.asserts.SoftAssert;
 public class InventoryTest extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
 
+
+    //this test reveals the fact that when adding certain items on standard user, logging out and switching to other users the items added to cart on
+    //standard user remain added for other users as well
     @Test
     public void TestAddToCartButtonForEachItemOnThePage() {
         LoginPage loginPage = new LoginPage(driver);
@@ -54,17 +57,20 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void CheckFilterSortingFunctionality() {
+//      For problem_user the test will fail for Z to A, Lo to Hi and Hi to Lo, as the option are unclickable
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("standard_user", "secret_sauce"); //for problem_user the test will fail for Z to A, Lo to Hi and Hi to Lo, as the option are unclickable
+        loginPage.login("standard_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.clickOnSortButton();
-        inventoryPage.selectSort("Price (low to high)"); // "Name (A to Z)"| "Name (Z to A)" | "Price (low to high)" | "Price (high to low)"
+        inventoryPage.selectSort("Price (low to high)");
+//      Sorting options: "Name (A to Z)"| "Name (Z to A)" | "Price (low to high)" | "Price (high to low)"
 }
 
     @Test
     public void CheckIfTheSameInventoryItemIsDisplayedWithinItsContainer(){
+//      Switch to "problem_user" in order to observe the assertions fail as for the problem_user each invetory item has a different item container
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("problem_user", "secret_sauce"); // switch to "problem_user" in order to observe the assertions fail
+        loginPage.login("problem_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
 
         String InvFirstItmTitle = inventoryPage.getFirstInvItemTitle();
@@ -100,21 +106,22 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void checkForDuplicatedItmImagesTest() {
-    LoginPage loginPage = new LoginPage(driver);
-    loginPage.login("problem_user", "secret_sauce"); // switch to "problem_user" in order to observe the assertions fail.
-    InventoryPage inventoryPage = new InventoryPage(driver);
-    softAssert.assertNotEquals(inventoryPage.getFirstItemImgAttribute(), inventoryPage.getSecondItemImgAttribute());
-    softAssert.assertNotEquals(inventoryPage.getSecondItemImgAttribute(),inventoryPage.getThirdItemImgAttribute());
-    softAssert.assertNotEquals(inventoryPage.getThirdItemImgAttribute(),inventoryPage.getFourthItemImgAttribute());
-    softAssert.assertNotEquals(inventoryPage.getFourthItemImgAttribute(),inventoryPage.getFifthItemImgAttribute());
-    softAssert.assertNotEquals(inventoryPage.getFifthItemImgAttribute(),inventoryPage.getSixthItemImgAttribute());
-    softAssert.assertAll();
+//      Switch to "problem_user" in order to observe the assertions fail.
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("problem_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        softAssert.assertNotEquals(inventoryPage.getFirstItemImgAttribute(), inventoryPage.getSecondItemImgAttribute());
+        softAssert.assertNotEquals(inventoryPage.getSecondItemImgAttribute(),inventoryPage.getThirdItemImgAttribute());
+        softAssert.assertNotEquals(inventoryPage.getThirdItemImgAttribute(),inventoryPage.getFourthItemImgAttribute());
+        softAssert.assertNotEquals(inventoryPage.getFourthItemImgAttribute(),inventoryPage.getFifthItemImgAttribute());
+        softAssert.assertNotEquals(inventoryPage.getFifthItemImgAttribute(),inventoryPage.getSixthItemImgAttribute());
+        softAssert.assertAll();
 }
 
     @Test
     public void checkForPlaceHolderImagesTest() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("problem_user", "secret_sauce");
+        loginPage.login("standard_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.placeHolderImgCheck();
     }

@@ -9,6 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.logging.SocketHandler;
+
+import static org.testng.AssertJUnit.fail;
 
 public class CheckoutPage {
 
@@ -20,39 +23,50 @@ public class CheckoutPage {
     private final By postalCodeLocator = By.id("postal-code");
     private final By cancelButton = By.id("cancel");
     private final By continueButton = By.id("continue");
+    private final By checkOutInfoFields = By.xpath("//div[@class='checkout_info']/div");
 
     public CheckoutPage(WebDriver driver) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         this.driver = driver;
     }
 
-    public void typeFirstName(String firstName){
+    public void typeFirstName(String firstName) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameLocator));
         driver.findElement(firstNameLocator).sendKeys(firstName);
     }
-    public void typeLastName(String lastName){
+
+    public void typeLastName(String lastName) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameLocator));
         driver.findElement(lastNameLocator).sendKeys(lastName);
     }
-    public void typePostalCode(String postalCode){
+
+    public void typePostalCode(String postalCode) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(postalCodeLocator));
         driver.findElement(postalCodeLocator).sendKeys(postalCode);
     }
-    public void clickOnCancelButton(){
+
+    public void clickOnCancelButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(cancelButton));
         driver.findElement(cancelButton).click();
     }
-    public void clickOnContinueButton(){
+
+    public void clickOnContinueButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(continueButton));
         driver.findElement(continueButton).click();
     }
-    public void insertCheckoutInformation(String firstName, String lastName, String postalCode){
+
+    public void insertCheckoutInformation(String firstName, String lastName, String postalCode) {
         typeFirstName(firstName);
         typeLastName(lastName);
         typePostalCode(postalCode);
+        List<WebElement> inputFields = driver.findElements(By.tagName("input"));
+        for (WebElement e : inputFields) {
+            String text = e.getAttribute("value");
+            if (text.isEmpty()) {
+                fail("Input text field is non-editable/readonly");
+            }
+        }
     }
-
-
 }
 
 

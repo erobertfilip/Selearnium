@@ -40,7 +40,7 @@ public class OrdersTest extends BaseTest {
     @Test
     public void CancelButtonFunctionalityTest(){
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login("problem_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addToCart("Backpack");
         inventoryPage.clickOnShoppingCartContainer();
