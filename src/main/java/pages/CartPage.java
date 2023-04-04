@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class CartPage {
+
     WebDriver driver;
     WebDriverWait wait;
 

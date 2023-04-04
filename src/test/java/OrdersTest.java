@@ -2,7 +2,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import pages.*;
 
-
 public class OrdersTest extends BaseTest {
 
     @Test

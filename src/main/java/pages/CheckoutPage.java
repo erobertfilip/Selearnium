@@ -9,6 +9,7 @@ import java.util.List;
 import static org.testng.AssertJUnit.fail;
 
 public class CheckoutPage {
+
     WebDriver driver;
     WebDriverWait wait;
 
