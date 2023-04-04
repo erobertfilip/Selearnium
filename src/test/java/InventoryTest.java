@@ -7,9 +7,9 @@ import org.testng.asserts.SoftAssert;
 public class InventoryTest extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
 
-//      This test reveals the fact that when adding certain items to the cart and then logging out and switching to other users the items added to cart on
-//      user in first place, remain added for other users as well
-//      This test also verifies the functionality of the "Add to cart" buttons
+//  This test reveals the fact that when adding certain items to the cart and then logging out and switching to other users the items added to cart on
+//  user in first place, remain added for other users as well
+//  This test also verifies the functionality of the "Add to cart" buttons
     @Test
     public void TestAddToCartButtonForEachItemOnThePage() {
         LoginPage loginPage = new LoginPage(driver);
@@ -43,8 +43,8 @@ public class InventoryTest extends BaseTest {
         inventoryPage.clickOnResetAppStateButton();
         String expectedValue = "add-to-cart-sauce-labs-bike-light";
         String idType = inventoryPage.checkRemoveButtonResetsAfterResetApp();
-        Assert.assertEquals(expectedValue, idType);                              //the assertion fails due to the fact that the "Remove" button does not change back
-        System.out.println(inventoryPage.checkRemoveButtonResetsAfterResetApp());//to "Add to cart" after using the "Reset App State" button, only after refreshing the page.
+        Assert.assertEquals(expectedValue, idType);
+//  The assertion fails due to the fact that the "Remove" button does not change back to "Add to cart" after using the "Reset App State" button, only after refreshing the page
     }
 
     @Test
@@ -57,18 +57,18 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void CheckFilterSortingFunctionality() {
-//      For problem_user the test will fail for Z to A, Lo to Hi and Hi to Lo, as the option are unclickable
+//  For problem_user the test will fail for Z to A, Lo to Hi and Hi to Lo, as the option are unclickable
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("standard_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.clickOnSortButton();
         inventoryPage.selectSort("Price (low to high)");
-//      Sorting options: "Name (A to Z)"| "Name (Z to A)" | "Price (low to high)" | "Price (high to low)"
+//  Sorting options: "Name (A to Z)"| "Name (Z to A)" | "Price (low to high)" | "Price (high to low)"
     }
 
     @Test
     public void CheckIfTheSameInventoryItemIsDisplayedWithinItsContainer(){
-//      Switch to "problem_user" in order to observe the assertions fail as for the problem_user each invetory item has a different item container
+//  Switch to "problem_user" in order to observe the assertions fail as for the problem_user each invetory item has a different item container
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("problem_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
@@ -106,7 +106,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void checkForDuplicatedItmImagesTest() {
-//      Switch to "problem_user" in order to observe the assertions fail.
+//  Switch to "problem_user" in order to observe the assertions fail.
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("problem_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);

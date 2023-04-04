@@ -14,8 +14,8 @@ public class InventoryPage {
     static WebDriver driver;
     WebDriverWait wait;
 
-    // INVENTORY PAGE SELECTORS
-    //Add to cart buttons
+//  INVENTORY PAGE SELECTORS
+//  Add to cart buttons
     private final By backpackAddToCart = By.id("add-to-cart-sauce-labs-backpack");
     private final By tShirtRedAddToCart = By.id("add-to-cart-test.allthethings()-t-shirt-(red)");
     private final By bikeLightAddToCart = By.id("add-to-cart-sauce-labs-bike-light");
@@ -28,7 +28,7 @@ public class InventoryPage {
     private final By fleeceJacketAddnRemoveFullXpathBtn = By.xpath("/html/body/div/div/div/div[2]/div/div/div/div[4]/div[2]/div[2]/button");
     private final By backpackAddnRemoveFullXpathBtn = By.xpath("/html/body/div/div/div/div[2]/div/div/div/div[1]/div[2]/div[2]/button");
 
-    //Other Inventory page elements
+//  Other Inventory page elements
     private final By sauceLabOnesie = By.id("add-to-cart-sauce-labs-onesie");
     private final By invContainer = By.id("inventory_container");
     private final By bikeLightRemoveFromCartButton = By.id("remove-sauce-labs-bike-light");
@@ -40,14 +40,14 @@ public class InventoryPage {
     private final By sortActiveOption = By.xpath("//div[@class='right_component']/span/span");
     private final By logOutButton = By.id("logout_sidebar_link");
 
-    //Sort buttons
+//  Sort buttons
     private final By sortButton = By.xpath("//*[@id='header_container']/div[2]/div/span/select");
     public final By sortZA = By.xpath("//div[@class='right_component']/span/select/option[2]");
     private final By sortAZ = By.xpath("//div[@class='right_component']/span/select/option[1]");
     private final By sortPriceLoHi = By.xpath("//div[@class='right_component']/span/select/option[3]");
     private final By sortHiLo = By.xpath("//div[@class='right_component']/span/select/option[4]");
 
-    //Items title selectors
+//  Items title selectors
     private final By firstItemTitle = By.xpath("//*[@id='item_4_title_link']");
     private final By secondItemTitle = By.xpath("//*[@id='item_0_title_link']");
     private final By thirdItemTitle = By.xpath("//*[@id='item_1_title_link']");
@@ -55,7 +55,7 @@ public class InventoryPage {
     private final By fifthItemTitle = By.xpath("//*[@id='item_2_title_link']");
     private final By sixthItemTitle = By.xpath("//*[@id='item_3_title_link']");
 
-    //Items imagines selectors
+//  Items imagines selectors
     private final By firstItmImg = By.xpath("//*[@id='item_4_img_link']/img");
     private final By secondItmImg = By.xpath("//*[@id='item_0_img_link']/img");
     private final By thirdItmImg = By.xpath("//*[@id='item_1_img_link']/img");
@@ -63,7 +63,7 @@ public class InventoryPage {
     private final By fifthItmImg = By.xpath("//*[@id='item_2_img_link']/img");
     private final By sixthItmImg = By.xpath("//*[@id='item_3_img_link']/img");
 
-    //INDIVIDUAL ITEM CONTAINER SELECTORS
+//  INDIVIDUAL ITEM CONTAINER SELECTORS
     private final By itemContainerTitle = By.xpath("//div[@class='inventory_details_name large_size']");
     private final By backToProductsButton = By.id("back-to-products");
 
@@ -100,8 +100,8 @@ public class InventoryPage {
         driver.findElement(logOutButton).click();
     }
 
-    //as the site has only 6 items inventory I've chosen to add a switch. I am aware there could be sites with thousands of items,
-    //and other methods would be more fitting/recommended, but for this instance, I've done it this way.
+//  As the site has only 6 items inventory I've chosen to add a switch. I am aware there could be sites with thousands of items,
+//  and other methods would be more fitting/recommended, but for this instance, I've done it this way.
     public void addToCart(String Item) {
         switch (Item) {
             case "TShirtRed":
@@ -159,7 +159,7 @@ public class InventoryPage {
         driver.findElement(sortButton).click();
     }
 
-    //Sorting switch selector and assert
+//  Sorting switch selector and assert
     public void selectSort(String Sort) {
         switch (Sort) {
             case "Name (A to Z)":
@@ -263,7 +263,7 @@ public class InventoryPage {
         driver.findElement(backToProductsButton).click();
     }
 
-    // Hard Assert methods that verify if the item displayed on the Inventory page list is the same one with the item's container page.
+//  Hard Assert methods that verify if the item displayed on the Inventory page list is the same one with the item's container page.
     public void firstItemTitleAssert() {
         String InvFirstItmTitle = getFirstInvItemTitle();
         System.out.println(getFirstInvItemTitle());
@@ -324,7 +324,7 @@ public class InventoryPage {
         clickOnBackToProducts();
     }
 
-    // Method which includes all hard assert methods (I know that is unused, but I did not want to delete it either, due to the exercise/practice reason)
+//  Method which includes all hard assert methods (I know that is unused, but I did not want to delete it either, due to the exercise/practice reason)
     public void pageItemsAsserts() {
         firstItemTitleAssert();
         secondItemTitleAssert();
@@ -335,7 +335,7 @@ public class InventoryPage {
     }
 
 
-    //Methods that will return picture's unique(or not) URL, respectively the "src" attribute value
+//  Methods that will return picture's unique(or not) URL, respectively the "src" attribute value
     public String getFirstItemImgAttribute() {
         return getAttributeValue(driver.findElement(firstItmImg), "src");
     }
@@ -361,7 +361,7 @@ public class InventoryPage {
     }
 
 
-    //Methods that will return Add/Remove button "data-test" attribute
+//  Methods that will return Add/Remove button "data-test" attribute
     public String getBikeLightDataTestAttributeValue() {
         return getAttributeValue(driver.findElement(bikeLightAddToCartFullXpath), "data-test");
     }

@@ -19,7 +19,7 @@ public class BaseTest {
 
     @After
     public void quitBrowser() {
-//      Added a thread sleep just so the browser will not immediately close
+//  Added a thread sleep just so the browser will not immediately close
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
