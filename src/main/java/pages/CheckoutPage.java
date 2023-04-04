@@ -1,20 +1,14 @@
 package pages;
-
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
-import java.util.logging.SocketHandler;
-
 import static org.testng.AssertJUnit.fail;
 
 public class CheckoutPage {
-
     WebDriver driver;
     WebDriverWait wait;
 
@@ -23,7 +17,7 @@ public class CheckoutPage {
     private final By postalCodeLocator = By.id("postal-code");
     private final By cancelButton = By.id("cancel");
     private final By continueButton = By.id("continue");
-    private final By checkOutInfoFields = By.xpath("//div[@class='checkout_info']/div");
+
 
     public CheckoutPage(WebDriver driver) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));

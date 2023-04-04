@@ -1,15 +1,12 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class CartPage {
-
     WebDriver driver;
     WebDriverWait wait;
 
@@ -40,13 +37,6 @@ public class CartPage {
         driver.findElement(checkoutButton).click();
     }
 
-    /*public void checkCartPageButtons(){
-        clickOnShoppingCartContainer();
-        clickOnContinueShopping();
-        clickOnShoppingCartContainer();
-        clickOnRemoveButton();
-    }*/
-
     public String getCartListRemoveClassAttribute() {
         return getAttributeValue(driver.findElement(cartList),"class");
     }
@@ -54,6 +44,5 @@ public class CartPage {
     public String getYourCartPageTitleText(){
         return driver.findElement(yourCartTitleLocator).getText();
     }
-
 
 }

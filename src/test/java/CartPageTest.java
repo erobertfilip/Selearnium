@@ -20,5 +20,4 @@ public class CartPageTest extends BaseTest {
         Assert.assertEquals(cartPage.getCartListRemoveClassAttribute(),removedItmAttribute);
     }
 
-
 }

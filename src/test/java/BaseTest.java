@@ -19,12 +19,15 @@ public class BaseTest {
         driver.get("https://www.saucedemo.com/");
     }
 
-
-}
-
-   /* @After
+    @After
     public void quitBrowser() {
+//      Added a thread sleep just so the browser will not immediately close
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         driver.quit();
     }
 
-}*/
+}

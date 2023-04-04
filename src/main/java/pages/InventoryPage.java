@@ -104,7 +104,6 @@ public class InventoryPage {
 
     //as the site has only 6 items inventory I've chosen to add a switch. I am aware there could be sites with thousands of items,
     //and other methods would be more fitting/recommended, but for this instance, I've done it this way.
-
     public void addToCart(String Item) {
         switch (Item) {
             case "TShirtRed":
@@ -327,7 +326,7 @@ public class InventoryPage {
         clickOnBackToProducts();
     }
 
-    // Method which includes all hard assert methods
+    // Method which includes all hard assert methods (I know that is unused, but I did not want to delete it either, due to the exercise/practice reason)
     public void pageItemsAsserts() {
         firstItemTitleAssert();
         secondItemTitleAssert();
@@ -336,6 +335,7 @@ public class InventoryPage {
         fifthItemTitleAssert();
         sixthItemTitleAssert();
     }
+
 
     //Methods that will return picture's unique(or not) URL, respectively the "src" attribute value
     public String getFirstItemImgAttribute() {
@@ -361,6 +361,7 @@ public class InventoryPage {
     public String getSixthItemImgAttribute() {
         return getAttributeValue(driver.findElement(sixthItmImg), "src");
     }
+
 
     //Methods that will return Add/Remove button "data-test" attribute
     public String getBikeLightDataTestAttributeValue() {

@@ -25,6 +25,7 @@ public class OrdersTest extends BaseTest {
         checkoutCompletePage.clickOnBackHomeButton();
         Assert.assertEquals(inventoryPage.getProductsPageTitleText(),"Products");
     }
+
     @Test
     public void ContinueShoppingButtonFunctionalityTest(){
         LoginPage loginPage = new LoginPage(driver);
@@ -37,6 +38,7 @@ public class OrdersTest extends BaseTest {
         cartPage.clickOnContinueShopping();
         Assert.assertEquals(inventoryPage.getProductsPageTitleText(),"Products");
     }
+
     @Test
     public void CancelButtonFunctionalityTest(){
         LoginPage loginPage = new LoginPage(driver);
@@ -55,4 +57,5 @@ public class OrdersTest extends BaseTest {
         checkoutPage.clickOnCancelButton();
         Assert.assertEquals(inventoryPage.getProductsPageTitleText(),"Products");
     }
+
 }

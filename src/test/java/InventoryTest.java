@@ -7,13 +7,13 @@ import org.testng.asserts.SoftAssert;
 public class InventoryTest extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
 
-
-    //this test reveals the fact that when adding certain items on standard user, logging out and switching to other users the items added to cart on
-    //standard user remain added for other users as well
+//      This test reveals the fact that when adding certain items to the cart and then logging out and switching to other users the items added to cart on
+//      user in first place, remain added for other users as well
+//      This test also verifies the functionality of the "Add to cart" buttons
     @Test
     public void TestAddToCartButtonForEachItemOnThePage() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login("problem_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addToCart("Backpack");
         inventoryPage.addToCart("TShirtRed");
@@ -21,7 +21,7 @@ public class InventoryTest extends BaseTest {
         inventoryPage.addToCart("Bolt T-Shirt");
         inventoryPage.addToCart("Fleece Jacket");
         inventoryPage.addToCart("Labs Onesie");
-        inventoryPage.clickOnBurgerMenuButton();  ///add  //remove
+        inventoryPage.clickOnBurgerMenuButton();
         inventoryPage.clickOnLogOutBtn();
         loginPage.login("problem_user", "secret_sauce");
         softAssert.assertTrue(inventoryPage.getBackpackDataTestAtrbVal().contains("add"));
@@ -64,7 +64,7 @@ public class InventoryTest extends BaseTest {
         inventoryPage.clickOnSortButton();
         inventoryPage.selectSort("Price (low to high)");
 //      Sorting options: "Name (A to Z)"| "Name (Z to A)" | "Price (low to high)" | "Price (high to low)"
-}
+    }
 
     @Test
     public void CheckIfTheSameInventoryItemIsDisplayedWithinItsContainer(){
@@ -125,8 +125,6 @@ public class InventoryTest extends BaseTest {
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.placeHolderImgCheck();
     }
-
-
 
 }
 
