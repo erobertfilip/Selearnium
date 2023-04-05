@@ -1,6 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-import pages.LoginPage;
+import pages.*;
 
 public class LoginTest extends BaseTest {
 
@@ -13,12 +13,16 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void TestLoginFailed_StandardUser() {
-        // code goes here
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("standarDd_user", "secret_sauce");
+        loginPage.AssertionFailed_StandardUserMessage();
     }
 
     @Test
     public void TestLogin_LockedOutUser() {
-        // code goes here
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("locked_out_user", "secret_sauce");
+        loginPage.AssertionLockedOutUserMessage();
     }
 
 }
