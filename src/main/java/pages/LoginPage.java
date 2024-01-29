@@ -12,15 +12,19 @@ public class LoginPage {
     WebDriver driver;
     WebDriverWait wait;
 
+    // Constructor
     public LoginPage(WebDriver driver) {
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         this.driver = driver;
     }
 
+    // Selectors
     private final By usernameInput = By.id("user-name");
     private final By passwordInput = By.id("password");
     private final By loginButton = By.id("login-button");
+    private final By errorBox = By.xpath("//div[@class='login-box']//h3");
 
+    // Methods that use the above selectors
     public void setUsername(String username) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput));
         driver.findElement(usernameInput).sendKeys(username);
@@ -42,4 +46,10 @@ public class LoginPage {
         clickLogin();
     }
 
+    public String getErrorTextField() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(errorBox));
+        return driver.findElement(errorBox).getText();
+    }
+
 }
+
